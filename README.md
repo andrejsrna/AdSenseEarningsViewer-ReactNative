@@ -1,79 +1,121 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+AdSense Stats App
+An AdSense Stats App built with React Native that allows you to easily track your Google AdSense earnings and performance data. Sign in with your Google account to view your earnings for the current month, last month, and the last 7 days.
 
-# Getting Started
+Features
+Google Sign-In Authentication: Securely sign in with your Google account.
+AdSense Data Fetching: Retrieve earnings data from the Google AdSense API.
+Earnings Overview:
+This Month's Earnings with percentage change compared to last month.
+Last Month's Earnings.
+Last 7 Days Earnings, displaying each day's earnings separately.
+Refresh Data: Manually refresh to get the latest earnings.
+Responsive UI: Built using React Native Elements for a polished look and feel.
+Environment Variables: Sensitive data like client IDs are managed through environment variables.
+Prerequisites
+Node.js: Make sure you have Node.js installed (version 12 or higher is recommended).
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+React Native CLI: Install the React Native CLI if you haven't already.
 
-## Step 1: Start the Metro Server
+bash
+Kopírovať kód
+npm install -g react-native-cli
+Google AdSense Account: You need an active Google AdSense account to fetch earnings data.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+Google Cloud Project: Set up a project in the Google Cloud Console with the Google AdSense API enabled.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+Getting Started
+1. Clone the Repository
+bash
+Kopírovať kód
+git clone https://github.com/yourusername/adsense-stats-app.git
+cd adsense-stats-app
+2. Install Dependencies
+bash
+Kopírovať kód
+npm install
+3. Set Up Environment Variables
+Create a .env file in the root directory of your project:
 
-```bash
-# using npm
-npm start
+bash
+Kopírovať kód
+touch .env
+Add your Google OAuth client IDs to the .env file:
 
-# OR using Yarn
-yarn start
-```
+env
+Kopírovať kód
+IOS_CLIENT_ID=your-ios-client-id.apps.googleusercontent.com
+WEB_CLIENT_ID=your-web-client-id.apps.googleusercontent.com
+Important: Do not commit the .env file to version control. Ensure .env is listed in your .gitignore file.
 
-## Step 2: Start your Application
+4. Configure Google Sign-In
+Ensure that your Google Cloud project has the OAuth consent screen configured and that you have created OAuth client IDs for both iOS and Web applications.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+iOS Client ID: Used for Google Sign-In on iOS devices.
+Web Client ID: Used for web authentication.
+5. Enable Google AdSense API
+In your Google Cloud Console:
 
-### For Android
+Navigate to APIs & Services > Library.
+Search for Google AdSense API.
+Enable the API for your project.
+6. Configure Babel
+Ensure your babel.config.js is set up to use react-native-dotenv:
 
-```bash
-# using npm
-npm run android
+javascript
+Kopírovať kód
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: [
+    [
+      'module:react-native-dotenv',
+      {
+        moduleName: '@env',
+        path: '.env',
+        allowUndefined: true,
+      },
+    ],
+  ],
+};
+7. Run the App
+Start the Metro bundler and run the app on your desired platform.
 
-# OR using Yarn
-yarn android
-```
+For iOS:
+bash
+Kopírovať kód
+npx react-native run-ios
+For Android:
+bash
+Kopírovať kód
+npx react-native run-android
+8. Test the App
+Sign In: On the homepage, click "Sign In with Google" and authenticate using your Google account.
+View Data: After signing in, your AdSense earnings data should be displayed.
+Refresh Data: Use the "Refresh Data" button to fetch the latest earnings.
+Sign Out: Click "Sign Out" to log out of your account.
+Project Structure
+App.tsx: Main application file containing the app logic.
+Components: Folder for any custom components used in the app.
+Screens: Folder for different screen components if you expand the app.
+Services: Folder for API services and network requests.
+assets: Folder for images, fonts, and other static assets.
+Dependencies
+React Native: ^0.70.0
+@rneui/themed: For UI components and theming.
+@react-native-google-signin/google-signin: For Google Sign-In authentication.
+axios: For making API requests to the AdSense API.
+react-native-dotenv: For environment variable management.
+Troubleshooting
+Authentication Errors: Ensure your client IDs are correct and that the OAuth consent screen is properly configured in the Google Cloud Console.
+API Errors: Verify that the AdSense API is enabled for your project and that your account has the necessary permissions.
+Environment Variables Not Found: Make sure you've restarted the Metro bundler after adding the .env file and that it's not committed to version control.
+Contributing
+Contributions are welcome! Please fork the repository and submit a pull request.
 
-### For iOS
+License
+This project is licensed under the MIT License.
 
-```bash
-# using npm
-npm run ios
+Contact
+If you have any questions or need further assistance, please contact:
 
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Your Name
+Email: your.email@example.com
